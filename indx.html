@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather API</title>
+</head>
+<body>
+    <script>
+        var request = new XMLHttpRequest();
+        request.open("GET", "https://restcountries.eu/rest/v2/all", true);
+        request.send();
+        request.onload = function () {
+            var data = JSON.parse(this.response);
+            for (var i in data) {
+                // console.log(data[i].name)
+                const key = "7c40c078d25296182f0baaa3c5f82aa8";
+                var link = "https://api.openweathermap.org/data/2.5/weather?q="+ data[i].name+"&appid=" + key;
+                var request = new XMLHttpRequest();
+                request.open("GET", link, true);
+                request.send();
+                request.onload = function () {
+                    var data = JSON.parse(this.response);
+           
+                  console.log("City:" +data.name+  "  Weather: " +data.weather[0].description + " Temp:" +  data.main.temp);
+
+
+                }
+
+            }
+           
+           
+        };
+ 
+       
+    </script>
+</body>
+</html>
